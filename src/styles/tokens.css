@@ -1,0 +1,56 @@
+/* ── 万物有声 · 可回放 ── 色板
+   两套并置：纸（场外）与幕（片内）。
+   纸上的金是金的暗影 #a8761f —— 同一个色相被纸吃掉了明度，
+   所以从纸滚进幕时，金色不需要换，只是从暗影变回本体。 */
+
+:root {
+  /* 纸 */
+  --paper: #faf6ec;
+  --paper-hi: #fffdf6;
+  --paper-dim: #f2ebdb;
+  --ink: #2b2823;
+  --ink-2: #5c554a;
+  --ink-3: #8d8578;
+  --rule: #e6dccb;
+  --rule-2: #d5c8b1;
+
+  /* 纸上的强调：赭金，用量 ≤5% */
+  --gilt: #a8761f;
+  --gilt-lift: #8d6119;
+
+  /* 幕内 */
+  --dark: #080b18;
+  --dark-2: #15131f;
+  --gold: #f5c451;
+  --pink: #ff6f9d;
+  --on-dark: #f4f1ea;
+  --on-dark-2: #8b8797;
+
+  /* 字 */
+  --serif: "Source Han Serif SC", "Noto Serif SC", "Songti SC", "SimSun", serif;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+          "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+  --mono: "GeistMono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --serif-en: "InstrumentSerif", "Times New Roman", serif;
+
+  /* 节奏 */
+  --gut: clamp(20px, 5vw, 88px);
+  --maxw: 1160px;
+
+  /* 缓动：全站只用两条 */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@font-face {
+  font-family: 'GeistMono';
+  src: url('/film/looks/fonts/GeistMono.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'InstrumentSerif';
+  src: url('/film/looks/fonts/InstrumentSerif.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}

@@ -1,0 +1,96 @@
+.col {
+  position: relative;
+  z-index: 2;
+  background: var(--paper);
+  padding: clamp(70px, 12vh, 140px) var(--gut) clamp(48px, 7vh, 76px);
+}
+.col-inner { max-width: var(--maxw); margin: 0 auto; text-align: center; }
+
+.col-rule { width: 1px; height: clamp(40px, 8vh, 80px); background: var(--rule-2); margin: 0 auto clamp(30px, 5vh, 54px); }
+
+.col-title {
+  font-size: clamp(44px, 8.6vw, 116px);
+  line-height: 1.02;
+  letter-spacing: .1em;
+  color: var(--ink);
+  margin-left: .1em; /* 字距补偿，视觉居中 */
+}
+.col-en {
+  font-size: clamp(9.5px, 1.05vw, 12.5px);
+  letter-spacing: .46em;
+  color: var(--gilt);
+  margin-top: 26px;
+  margin-left: .46em;
+}
+
+.col-line {
+  margin: clamp(26px, 4.5vh, 44px) auto 0;
+  font-size: clamp(14px, 1.35vw, 16.5px);
+  line-height: 2;
+  color: var(--ink-2);
+  max-width: 30em;
+}
+
+.col-sign {
+  margin-top: 26px;
+  font-size: 12px;
+  letter-spacing: .16em;
+  color: var(--ink-3);
+}
+
+.col-links {
+  display: flex;
+  justify-content: center;
+  gap: clamp(14px, 3vw, 46px);
+  flex-wrap: wrap;
+  margin: clamp(26px, 4.5vh, 42px) 0 clamp(40px, 7vh, 74px);
+}
+.col-link {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s var(--ease-out), color .3s var(--ease-out);
+}
+.col-link:hover { border-bottom-color: var(--gilt); }
+.col-link-k { font-size: 9px; letter-spacing: .26em; color: var(--ink-3); }
+.col-link-v { font-size: 13px; color: var(--ink); }
+.col-link:hover .col-link-v { color: var(--gilt); }
+
+.col-foot {
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 9.5px;
+  letter-spacing: .14em;
+  color: var(--ink-3);
+}
+.col-top {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 9.5px;
+  letter-spacing: .14em;
+  color: var(--ink-2);
+  transition: color .25s var(--ease-out);
+}
+.col-top:hover { color: var(--gilt); }
+.col-top svg { transition: transform .35s var(--ease-out); }
+.col-top:hover svg { transform: translateY(-3px); }
+
+@media (max-width: 640px) {
+  .col-foot { justify-content: center; text-align: center; }
+  .col-sign {
+  margin-top: 26px;
+  font-size: 12px;
+  letter-spacing: .16em;
+  color: var(--ink-3);
+}
+
+.col-links { gap: 18px; }
+}

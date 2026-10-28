@@ -1,0 +1,145 @@
+/* 片：一整段被滚动驱动的放映 */
+.film {
+  position: relative;
+  height: 640vh;          /* 22.5 秒铺开约 5.4 屏，一秒 ≈ 24vh */
+  z-index: 2;
+  --veil: var(--paper);
+}
+
+.film-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--dark);
+  contain: strict;
+}
+
+.film-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  pointer-events: none;   /* 滚轮必须落到父页面，否则整段卡死 */
+  background: var(--dark);
+}
+
+/* 纸色的幕布：上下两块，各自从 50% 收到 0% 就露出舞台；离场时反向合上 */
+.film-veil {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: var(--veil);
+  z-index: 4;
+  will-change: transform;
+  pointer-events: none;
+}
+.film-veil--top { top: 0; transform-origin: 50% 0; transform: scaleY(1); }
+.film-veil--bottom { bottom: 0; transform-origin: 50% 100%; transform: scaleY(1); }
+
+/* 我的 UI 只占片内空位：右上时间码、右下进度。片内左上已有标题、底部已有字幕，
+   这里绝不再写字，重复一遍就廉价了。 */
+.film-ui {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  color: var(--on-dark);
+  opacity: 0;
+  transition: opacity .55s var(--ease-io);
+  padding: clamp(16px, 2.6vw, 40px) clamp(16px, 3vw, 52px) clamp(16px, 2.6vw, 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.film-ui.is-in { opacity: 1; }
+
+.film-hud {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 7px;
+  text-shadow: 0 2px 22px rgba(0, 0, 0, .6);
+}
+.film-tcwrap { display: flex; align-items: baseline; gap: 9px; }
+.film-tc {
+  font-size: clamp(16px, 1.55vw, 23px);
+  font-weight: 300;
+  letter-spacing: .02em;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+.film-tc-total {
+  font-size: 10px;
+  letter-spacing: .16em;
+  color: rgba(244, 241, 234, .4);
+}
+
+.film-act { display: flex; align-items: baseline; gap: 8px; }
+.film-act-i { font-size: 9.5px; letter-spacing: .3em; color: var(--gold); opacity: .85; }
+.film-act-cn {
+  font-family: var(--serif);
+  font-size: clamp(12px, 1vw, 14px);
+  letter-spacing: .22em;
+  color: rgba(244, 241, 234, .62);
+}
+
+.film-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: clamp(140px, 20vw, 260px);
+}
+.film-pct { font-size: 9.5px; letter-spacing: .1em; color: rgba(244, 241, 234, .38); }
+.film-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(244, 241, 234, .2);
+  position: relative;
+}
+.film-line > span {
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+
+/* 载入：3808 格子在搭 */
+.film-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: var(--dark);
+  color: rgba(244, 241, 234, .5);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .34em;
+  transition: opacity .6s var(--ease-io), visibility .6s;
+}
+.film-loading.is-done { opacity: 0; visibility: hidden; }
+.film-loadline { width: 120px; height: 1px; background: rgba(244, 241, 234, .14); overflow: hidden; }
+.film-loadline > span {
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: var(--gold);
+  animation: sweep 1.15s var(--ease-io) infinite;
+}
+@keyframes sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+@media (max-width: 860px) {
+  .film { height: 520vh; }
+}

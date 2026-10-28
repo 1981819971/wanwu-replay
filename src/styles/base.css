@@ -1,0 +1,90 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: var(--paper);
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto; /* 滚动即播放，绝不能让浏览器自己加惯性 */
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  background: var(--paper);
+  transition: background-color .5s var(--ease-io);
+}
+
+body.is-dark { background: var(--dark); }
+
+h1, h2, h3, p, figure, blockquote { margin: 0; }
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+
+::selection { background: var(--gilt); color: var(--paper-hi); }
+
+/* 极淡纸纹：一道噪点，别无其它装饰 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body.is-dark::before { opacity: .05; mix-blend-mode: screen; }
+
+/* 滚动条：一条细线 */
+::-webkit-scrollbar { width: 9px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--rule-2); border-radius: 9px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gilt); }
+
+/* ── 排版基线 ── */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.serif-h {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: .01em;
+  line-height: 1.24;
+  color: var(--ink);
+}
+.lead {
+  font-size: clamp(15px, 1.35vw, 18px);
+  line-height: 1.85;
+  color: var(--ink-2);
+  max-width: 34em;
+}
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+/* 章节壳 */
+.sec {
+  position: relative;
+  padding: clamp(72px, 11vh, 150px) var(--gut);
+  z-index: 2;
+}
+.sec-inner { max-width: var(--maxw); margin: 0 auto; }
+
+/* 细规线 */
+.rule { height: 1px; background: var(--rule); border: 0; }
+
+/* 入场：只用一次，滚动映射靠 JS 加 .in */
+.rv { opacity: 0; transform: translateY(18px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+.rv.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rv { opacity: 1 !important; transform: none !important; }
+}

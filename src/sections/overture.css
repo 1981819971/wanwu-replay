@@ -1,0 +1,106 @@
+.overt {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(22px, 3.4vh, 40px) var(--gut) clamp(26px, 4vh, 46px);
+  z-index: 2;
+}
+
+/* 四角取景准星：0.9px 的细十字，别的装饰一个都不要 */
+.overt-corner {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  opacity: .5;
+}
+.overt-corner::before,
+.overt-corner::after {
+  content: '';
+  position: absolute;
+  background: var(--rule-2);
+}
+.overt-corner::before { left: 0; top: 7px; width: 15px; height: 1px; }
+.overt-corner::after { left: 7px; top: 0; width: 1px; height: 15px; }
+.overt-corner.tl { left: 16px; top: 16px; }
+.overt-corner.tr { right: 16px; top: 16px; }
+.overt-corner.bl { left: 16px; bottom: 16px; }
+.overt-corner.br { right: 16px; bottom: 16px; }
+
+.overt-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.overt-brand { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.overt-cn { font-size: clamp(17px, 1.6vw, 21px); letter-spacing: .12em; }
+.overt-sub { letter-spacing: .3em; padding-left: 14px; border-left: 1px solid var(--rule-2); }
+.overt-right { text-align: right; opacity: .75; }
+
+.overt-mid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(24px, 4.2vh, 48px);
+  padding: 0 0 clamp(40px, 11vh, 120px);   /* 重心略低于正中：像片头，不像 PPT */
+}
+
+.overt-tcwrap { display: flex; flex-direction: column; gap: 14px; }
+.overt-tc {
+  font-size: clamp(50px, 12.2vw, 182px);
+  line-height: .92;
+  letter-spacing: -.035em;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  display: block;
+  /* 数字宽窄一致，滚动时不许抖 */
+  font-feature-settings: 'tnum' 1;
+}
+.overt-tcline { display: block; height: 1px; background: var(--rule); position: relative; max-width: min(100%, 620px); }
+.overt-tcline > span {
+  position: absolute; left: 0; top: -0.5px; height: 2px; width: 100%;
+  background: var(--gilt); transform-origin: 0 50%; transform: scaleX(0); display: block;
+}
+
+.overt-claim {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(17px, 2.2vw, 33px);
+  line-height: 1.62;
+  color: var(--ink);
+  letter-spacing: .01em;
+}
+.overt-claim em {
+  font-style: normal;
+  color: var(--gilt);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: .06em;
+}
+
+.overt-foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid var(--rule);
+  padding-top: 14px;
+  flex-wrap: wrap;
+}
+.overt-hint { display: flex; align-items: center; gap: 9px; color: var(--ink-3); }
+.overt-hint svg { animation: nudge 2.4s var(--ease-io) infinite; }
+@keyframes nudge {
+  0%, 62%, 100% { transform: translateY(0); opacity: .75; }
+  74% { transform: translateY(5px); opacity: 1; }
+}
+.overt-spec { opacity: .7; text-align: right; }
+
+@media (max-width: 720px) {
+  .overt-right { display: none; }
+  .overt-tc { letter-spacing: -.045em; }
+  .overt-spec { font-size: 9.5px; letter-spacing: .18em; }
+}
