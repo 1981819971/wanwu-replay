@@ -2,7 +2,7 @@
 
 一支 22.5 秒的一镜到底动效片，和一段能被你倒着滚回去的代码。
 
-线上：https://wanwu-replay.app.workbuddy.host/?sharecode=GM76WSCYMR
+**[在线体验](https://wanwu-replay.app.workbuddy.host/?sharecode=GM76WSCYMR)** · React · TypeScript · Vite · [MIT](LICENSE)
 
 ## 这是什么
 
@@ -69,3 +69,7 @@ npm run build    # 构建到 dist/
 - `public/film/looks/fonts/` 里的字体文件未入库（授权原因），缺失时回落到系统等宽/衬线字体，排版结构不受影响。
 - `public/stills/` 的静帧是从成片里抽的，同样未入库。
 - 站内第三章展示的四个动效组件，源码在 `src/fx/`，是从 ReactBits 的 199 件里逐件转成零依赖原生 JS 后接入的。
+
+## 许可证
+
+MIT，见 [LICENSE](LICENSE)。
